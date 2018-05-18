@@ -248,14 +248,14 @@ if ((message.content === `${prefix}등록`)||(message.content === `${prefix}참�
 		{
 			  
 			//중복 체크 활성화
-			/*
+			
 			if(username[for_count]==cash)
 			{
 				message.channel.send(`${username[for_count]}님은 이미 참가목록에 있습니다.`);
 					break; //에러발생시 에러활성화
 				
 			}
-			//*/  
+			
 		 if(username[for_count]==0){
 				
 			username[for_count]=cash;
