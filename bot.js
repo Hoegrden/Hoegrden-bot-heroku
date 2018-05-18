@@ -34,6 +34,7 @@ var maplog=[0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 client.on('ready', () => {
   console.log('NeJunbot on!'); 
+	online_check1();
 });
 
 
