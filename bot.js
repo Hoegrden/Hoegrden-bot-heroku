@@ -3,13 +3,6 @@ const client = new Discord.Client();
 const prefix = '!'
 
 
-
-
-
-
-
-
-
 var count=0;
 var cash, chcash, error=0;
 var for_count, a=0;
@@ -26,7 +19,9 @@ var blue_count=1; //블루 슬롯(0부터 시작하나, 0은 캡틴자리)
 var red_count=6;
 var maplog_sum=0;
 var game_mode=0;
+var game_mode_char=['내전 캡틴전', '내전 랜덤전', '내전 캡틴+랜덤오퍼전'];
 var unknown_commend=0;
+var pick_time=0;
 
 var maplog=[0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -34,11 +29,7 @@ var maplog=[0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 client.on('ready', () => {
   console.log('NeJunbot on!'); 
-
 });
-
-
-
 
 
 
@@ -136,6 +127,7 @@ function captin_pick() {
 	}	
 	
 	pick_embed();
+	pick_time=1; //!선택 명령어 활성화
 }
 
 
@@ -164,6 +156,7 @@ var random_count=0;
 	}	
 	
 	pick_embed();
+	clear_que();
 }
 
 
@@ -185,7 +178,7 @@ function pick_embed() {
 			value: (`${username[0]} ${username[1]} ${username[2]} ${username[3]} ${username[4]} ${username[5]} ${username[6]} ${username[7]} ${username[8]} ${username[9]}`)},
 			{
 			name: "- 선택방법",
-			value: (`!선택 @유저이름  [@자동완성 기능으로 입력하시기 바랍니다]\n청팀부터 선택 가능하며, 양측 캡틴이 교대로 선택하게 됩니다.`)},
+			value: (`!선택 @유저이름  [@자동완성 기능으로 입력하시기 바랍니다]\n청팀부터 선택 가능하며, 양측 캡틴이 교대로 선택하게 됩니다. \n\n 현재 게임모드: ${game_mode_char[game_mode]}`)},
 		]
 			
 		}	
@@ -223,6 +216,7 @@ blue_count=1;
 red_count=6;
 maplog_sum=0;
 game_mode=0;
+pick_time=0;
 
 for(for_count=0;for_count<=9;for_count++){
 	
@@ -248,20 +242,26 @@ if ((message.content === `${prefix}등록`)||(message.content === `${prefix}참�
 		{
 			  
 			//중복 체크 활성화
-			
+			/*
 			if(username[for_count]==cash)
 			{
 				message.channel.send(`${username[for_count]}님은 이미 참가목록에 있습니다.`);
 					break; //에러발생시 에러활성화
 				
 			}
-			
+			//*/  
 		 if(username[for_count]==0){
 				
 			username[for_count]=cash;
 			//username 배열에 임시값 저장		
 
-			message.channel.send(`${username[for_count]}님 참가목록에 등록되었습니다. [${count+1}/10]`); 
+			message.channel.send({embed: {
+			color: 3066993,
+			fields: [{name: "- 매치 참가목록에 등록되었습니다", value: (`${username[for_count]}님 참가되었습니다 [${count+1}/10]`)},
+			{name: "- 현재 게임모드", value: (game_mode_char[game_mode])} ],
+			}});
+			
+			
 			count++;			
 			
 			break;
@@ -274,12 +274,13 @@ if ((message.content === `${prefix}등록`)||(message.content === `${prefix}참�
 		if(game_mode==0) //내전 캡틴전
 		{
 		//message.reply('매치 스타트!');
-		message.channel.send(`\n **모두 모여주세요! 선택이 시작되었습니다!** \n${username[0]} ${username[1]} ${username[2]} ${username[3]} ${username[4]} \n${username[5]} ${username[6]} ${username[7]} ${username[8]} ${username[9]}`);
+		message.channel.send(` **모두 모여주세요! 선택이 시작되었습니다!** \n${username[0]} ${username[1]} ${username[2]} ${username[3]} ${username[4]} \n${username[5]} ${username[6]} ${username[7]} ${username[8]} ${username[9]}`);
 		captin_pick();
+
 		}
 		if(game_mode==1) //내전 랜덤전
 		{
-		message.channel.send(`\n **모두 모여주세요! 게임이 시작되었습니다!** \n${username[0]} ${username[1]} ${username[2]} ${username[3]} ${username[4]} \n${username[5]} ${username[6]} ${username[7]} ${username[8]} ${username[9]}`);
+		message.channel.send(` **모두 모여주세요! 게임이 시작되었습니다!** \n${username[0]} ${username[1]} ${username[2]} ${username[3]} ${username[4]} \n${username[5]} ${username[6]} ${username[7]} ${username[8]} ${username[9]}`);
 		random_pick();
 		}
 	full=1;
@@ -511,7 +512,7 @@ else if (message.content === `${prefix}맵`) {
 ////////////////////////////////////////////// 상위권한 명령어(매치 재시작)
 else if (message.content === `${prefix}매치재시작`) {
 	
-	if(message.member.roles.some(r=>["Operator", "스탭"].includes(r.name)) ) {
+	if(message.member.roles.some(r=>["Operator", "스탭", "상담원"].includes(r.name)) ) {
 
 	
 		clear_que();
@@ -546,10 +547,10 @@ else if (message.content === `${prefix}매치재시작`) {
 else if (message.content.startsWith(`${prefix}선택`)) {
 
 	cash=message.author
-var cash2 = message.mentions.users.first();
+	var cash2 = message.mentions.users.first();
 
 
-	if(red_count!=10){
+	if((pick_time==1)&&(game_mode==0)){
 		if((pick_turn==0)&&(cash==(picked_user[0]))){ //청팀0, 주황팀1	
 			for(for_count=0;for_count<=9;for_count++)
 			{
@@ -669,13 +670,15 @@ var cash2 = message.mentions.users.first();
 			}
 			red_count++;
 			pick_embed();
-			message.channel.send(`\n\n**매치가 시작되었습니다** \n:small_blue_diamond:청팀: ${picked_user[0]} ${picked_user[1]} ${picked_user[2]} ${picked_user[3]} ${picked_user[4]} \n:small_orange_diamond:주황팀: ${picked_user[5]} ${picked_user[6]} ${picked_user[7]} ${picked_user[8]} ${picked_user[9]}\n\n 맵:${random_map()}`);
+			message.channel.send(`**매치가 시작되었습니다** \n:small_blue_diamond:청팀: ${picked_user[0]} ${picked_user[1]} ${picked_user[2]} ${picked_user[3]} ${picked_user[4]} \n:small_orange_diamond:주황팀: ${picked_user[5]} ${picked_user[6]} ${picked_user[7]} ${picked_user[8]} ${picked_user[9]}\n\n 맵:${random_map()}`);
 			clear_que();
 		}
 		else
 		{
 			pick_embed();
 		}
+		
+		
 	}
 	else
 	{
@@ -685,7 +688,7 @@ var cash2 = message.mentions.users.first();
 		color: 15158332,
 		fields: [{
 		name: "- 에러",
-		value: (`선택이 종료되었습니다.`)}
+		value: (`선택의 시간이 아닙니다`)}
 		]
 		}	
 		});
@@ -714,7 +717,7 @@ client.on('message', async message => {
  
 	if (message.content === `${prefix}게임모드`) {
 		 
-		if(message.member.roles.some(r=>["Operator", "스탭"].includes(r.name)) ) {
+		if(message.member.roles.some(r=>["Operator", "스탭", "상담원"].includes(r.name)) ) {
 			
 			
 			
@@ -731,15 +734,8 @@ client.on('message', async message => {
 				await msg.react('2⃣');
 				await msg.react('3⃣');
 		
-		
-		 var game_mode_char;
-		if(game_mode==0)
-		 {game_mode_char='내전 캡틴전';}
-		else if(game_mode==1)
-		 {game_mode_char='내전 랜덤전';}
-		else if(game_mode==2)
-		 {game_mode_char='내전 캡틴+랜덤오퍼전';}
-	 
+				
+			
 
 			const filter = (reaction, user) => {
 				//if(message.member.roles.some(r=>["Operator", "스탭"].includes(r.name)) ) {
@@ -789,10 +785,20 @@ client.on('message', async message => {
 						game_mode=2;
 					}
 				})
-				.catch(collected => {
-					console.log(` After a minute, only ${collected.size} out of 4 reacted.`);
-					message.reply('${message.author}님은 게임모드를 변경할 수 있는 권한이 없습니다');
-				});
+				
+		}
+		
+		else
+		{
+			message.channel.send({embed: {
+			color: 15158332,
+			fields: [{
+			name: "- 에러",
+			value: (`권한이 없습니다. 게임모드 변경은 오퍼레이터 이상부터 가능합니다.`)}
+			]
+			}	
+			});
+			
 		}
 			
 	}
@@ -817,5 +823,6 @@ client.on('message', async message => {
 	unknown_commend=0;
 	
 });
+
 
 client.login(process.env.BOT_TOKEN);
