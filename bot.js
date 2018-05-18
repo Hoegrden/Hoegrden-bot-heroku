@@ -242,14 +242,14 @@ if ((message.content === `${prefix}등록`)||(message.content === `${prefix}참�
 		{
 			  
 			//중복 체크 활성화
-			
+			/*
 			if(username[for_count]==cash)
 			{
 				message.channel.send(`${username[for_count]}님은 이미 참가목록에 있습니다.`);
 					break; //에러발생시 에러활성화
 				
 			}
-			
+			//*/  
 		 if(username[for_count]==0){
 				
 			username[for_count]=cash;
@@ -276,14 +276,14 @@ if ((message.content === `${prefix}등록`)||(message.content === `${prefix}참�
 		//message.reply('매치 스타트!');
 		message.channel.send(` **모두 모여주세요! 선택이 시작되었습니다!** \n${username[0]} ${username[1]} ${username[2]} ${username[3]} ${username[4]} \n${username[5]} ${username[6]} ${username[7]} ${username[8]} ${username[9]}`);
 		captin_pick();
-
+		full=1;
 		}
 		if(game_mode==1) //내전 랜덤전
 		{
 		message.channel.send(` **모두 모여주세요! 게임이 시작되었습니다!** \n${username[0]} ${username[1]} ${username[2]} ${username[3]} ${username[4]} \n${username[5]} ${username[6]} ${username[7]} ${username[8]} ${username[9]}`);
 		random_pick();
 		}
-	full=1;
+	
 	
 	}
 	else if(full==1){
