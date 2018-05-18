@@ -25,7 +25,7 @@ var pick_turn=0;
 var blue_count=1; //블루 슬롯(0부터 시작하나, 0은 캡틴자리)
 var red_count=6;
 var maplog_sum=0;
-var game_mode=1;
+var game_mode=0;
 var unknown_commend=0;
 
 var maplog=[0, 0, 0, 0, 0, 0, 0, 0, 0];
