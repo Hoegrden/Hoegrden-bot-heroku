@@ -23,6 +23,7 @@ var game_mode_char=['내전 캡틴전', '내전 랜덤전', '내전 캡틴+랜�
 var unknown_commend=0;
 var pick_time=0;
 
+
 var maplog=[0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
@@ -107,7 +108,7 @@ function random_map() {
 
 ////////////////////////////////////////////// 캡틴픽랜덤픽 함수
 function captin_pick() {
-	var cap_1, cap_2;
+	var cap_1, cap_2, cap_3;
 	cap_1=generateRandom(0, 9);
 	while(true)
 	{		
@@ -116,10 +117,19 @@ function captin_pick() {
 		{
 			cap_2=generateRandom(0, 9);		
 		}
+		if(cap_2==cap_3)
+		{
+			cap_3=generateRandom(0, 9);		
+		}
+		if(cap_1==cap_3)
+		{
+			cap_1=generateRandom(0, 9);		
+		}
 		else
 		{
 			picked_user[0]=username[cap_1];
 			picked_user[5]=username[cap_2];
+			picked_user[6]=username[cap_3];
 			username[cap_1]='';
 			username[cap_2]='';
 			break;	
@@ -172,7 +182,7 @@ function pick_embed() {
 			value: (`:small_blue_diamond:청팀: ${picked_user[0]} ${picked_user[1]} ${picked_user[2]} ${picked_user[3]} ${picked_user[4]} \n:small_orange_diamond:주황팀: ${picked_user[5]} ${picked_user[6]} ${picked_user[7]} ${picked_user[8]} ${picked_user[9]}`)},
 			{
 			name: "- 캡틴",
-			value: (`:small_blue_diamond:청팀: ${picked_user[0]} \n:small_orange_diamond:주황팀:${picked_user[5]}`)},
+			value: (`:small_blue_diamond:청팀: ${picked_user[0]} \n:small_orange_diamond:주황팀:${picked_user[5]}, 3팀${picked_user[6]}`)},
 			{
 			name: "- 선택대기 플레이어",
 			value: (`${username[0]} ${username[1]} ${username[2]} ${username[3]} ${username[4]} ${username[5]} ${username[6]} ${username[7]} ${username[8]} ${username[9]}`)},
