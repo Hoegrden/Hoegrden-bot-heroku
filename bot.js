@@ -284,7 +284,7 @@ if ((message.content === `${prefix}등록`)||(message.content === `${prefix}참�
 			{name: "- 현재 게임모드", value: (game_mode_char[game_mode])} ],
 			}});
 			
-			tournament();
+			//tournament();
 			count++;			
 			
 			break;
