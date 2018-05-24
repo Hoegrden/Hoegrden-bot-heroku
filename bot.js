@@ -51,7 +51,7 @@ client.on('message', message => {
                 color: 3447003,
                 fields: [{
                     name: "- 대진표",
-                    value: (`ㅤㅤ                                               ${tournament_team[0]}\n                              ┌────────┴───────┐\nㅤㅤ                   ${tournament_team[1]}ㅤㅤ                                     ${tournament_team[2]}\nㅤㅤㅤ    ┌───┴───┐ㅤㅤ                ┌───┴───┐\nㅤ      ㅤ${tournament_team[3]}  ㅤㅤㅤ   ${tournament_team[4]}ㅤㅤ            ${tournament_team[5]}ㅤ   ㅤ      ${tournament_team[6]}\nㅤ      ┌─┴─┐ㅤ      ┌─┴─┐ㅤㅤ   ┌─┴─┐ㅤ     ┌─┴─┐\nㅤ    ${tournament_team[7]}     ${tournament_team[8]}       ${tournament_team[9]}     ${tournament_team[10]}        ${tournament_team[11]}     ${tournament_team[12]}      ${tournament_team[13]}     ${tournament_team[14]}`)
+                    value: (`ㅤㅤ                                               ${tournament_team[0]}\n                              ┌────────┴───────┐\nㅤㅤ                   ${tournament_team[1]}ㅤㅤ                                     ${tournament_team[2]}\nㅤㅤㅤ    ┌───┴───┐ㅤㅤ                ┌───┴───┐\nㅤ      ㅤ${tournament_team[3]}  ㅤ   ${tournament_team[4]}ㅤㅤ            ${tournament_team[5]}ㅤ   ㅤ      ${tournament_team[6]}\nㅤ      ┌─┴─┐ㅤ      ┌─┴─┐ㅤㅤ   ┌─┴─┐ㅤ     ┌─┴─┐\nㅤ    ${tournament_team[7]}     ${tournament_team[8]}       ${tournament_team[9]}     ${tournament_team[10]}        ${tournament_team[11]}     ${tournament_team[12]}      ${tournament_team[13]}     ${tournament_team[14]}`)
                 }
                 ]
 
