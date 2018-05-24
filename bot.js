@@ -23,6 +23,9 @@ var game_mode_char=['내전 캡틴전', '내전 랜덤전', '내전 캡틴+랜�
 var unknown_commend=0;
 var pick_time=0;
 
+var tournament_team = [':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:', ':white_large_square:'];
+
+
 
 var maplog=[0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -38,6 +41,24 @@ client.on('ready', () => {
 
 client.on('message', message => {
 	
+
+
+    var tournament = function (team) {
+
+
+        message.channel.send({
+            embed: {
+                color: 3447003,
+                fields: [{
+                    name: "- 대진표",
+                    value: (`ㅤㅤ                                               ${tournament_team[0]}\n                              ┌────────┴───────┐\nㅤㅤ                   ${tournament_team[1]}ㅤㅤ                                     ${tournament_team[2]}\nㅤㅤㅤ    ┌───┴───┐ㅤㅤ                ┌───┴───┐\nㅤ      ㅤ${tournament_team[3]}  ㅤㅤㅤ   ${tournament_team[4]}ㅤㅤ            ${tournament_team[5]}ㅤ   ㅤ      ${tournament_team[6]}\nㅤ      ┌─┴─┐ㅤ      ┌─┴─┐ㅤㅤ   ┌─┴─┐ㅤ     ┌─┴─┐\nㅤ    ${tournament_team[7]}     ${tournament_team[8]}       ${tournament_team[9]}     ${tournament_team[10]}        ${tournament_team[11]}     ${tournament_team[12]}      ${tournament_team[13]}     ${tournament_team[14]}`)
+                }
+                ]
+
+            }
+        });
+
+    }	
 	
 	
 ////////////////////////////////////////////// 오프라인시 킥 함수
@@ -263,7 +284,7 @@ if ((message.content === `${prefix}등록`)||(message.content === `${prefix}참�
 			{name: "- 현재 게임모드", value: (game_mode_char[game_mode])} ],
 			}});
 			
-			
+			tournament();
 			count++;			
 			
 			break;
