@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = '!'
+const prefix = '='
 
 
 var count=0;
@@ -201,7 +201,7 @@ function pick_embed() {
 			value: (`${username[0]} ${username[1]} ${username[2]} ${username[3]} ${username[4]} ${username[5]} ${username[6]} ${username[7]} ${username[8]} ${username[9]}`)},
 			{
 			name: "- 선택방법",
-			value: (`!선택 @유저이름  [@자동완성 기능으로 입력하시기 바랍니다]\n청팀부터 선택 가능하며, 양측 캡틴이 교대로 선택하게 됩니다. \n\n 현재 게임모드: ${game_mode_char[game_mode]}`)},
+			value: (`=선택 @유저이름  [@자동완성 기능으로 입력하시기 바랍니다]\n청팀부터 선택 가능하며, 양측 캡틴이 교대로 선택하게 됩니다. \n\n 현재 게임모드: ${game_mode_char[game_mode]}`)},
 		]
 			
 		}	
@@ -488,13 +488,13 @@ else if (message.content === `${prefix}명령어`) {
     color: 3447003,
     fields: [{
         name: "- 호가든봇 일반 명령어",
-        value: "!등록\n!나가기\n!등록인원\n!맵\n!랜덤맵"
+        value: "=등록\n=나가기\n=등록인원\n=맵\n=랜덤맵"
 		}, {
 		 name: "- 호가든봇 켑틴 명령어",
-        value: "!선택 @유저이름"
+        value: "=선택 @유저이름"
 		}, {
 		 name: "- 호가든봇 오퍼이상 사용가능 명령어",
-        value: "!매치재시작"
+        value: "=매치재시작"
 		}
 	]
 	}	
@@ -836,7 +836,7 @@ client.on('message', async message => {
 			fields: [{
 			name: "- 에러",
 			value: (`알 수 없는 명령어입니다.`)},
-			{name: "-도우말 명령어",value: "(!명령어)"}
+			{name: "-도우말 명령어",value: "(=명령어)"}
 			]
 			}	
 			});
