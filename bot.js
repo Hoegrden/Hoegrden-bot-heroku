@@ -493,7 +493,7 @@ else if (message.content === `${prefix}명령어`) {
 		 name: "- 호가든봇 켑틴 명령어",
         value: "=선택 @유저이름"
 		}, {
-		 name: "- 호가든봇 오퍼이상 사용가능 명령어",
+		 name: "- 호가든봇 사용주의 명령어 (남용금지)",
         value: "=매치재시작"
 		}
 	]
@@ -535,7 +535,7 @@ else if (message.content === `${prefix}맵`) {
 ////////////////////////////////////////////// 상위권한 명령어(매치 재시작)
 else if (message.content === `${prefix}매치재시작`) {
 	
-	if(message.member.roles.some(r=>["Operator", "스탭", "상담원"].includes(r.name)) ) {
+	if(message.member.roles.some(r=>["비상구", "자유평등"].includes(r.name)) ) {
 
 	
 		clear_que();
@@ -740,7 +740,7 @@ client.on('message', async message => {
  
 	if (message.content === `${prefix}게임모드`) {
 		 
-		if(message.member.roles.some(r=>["Operator", "스탭", "상담원"].includes(r.name)) ) {
+		if(message.member.roles.some(r=>["비상구", "자유평등"].includes(r.name)) ) {
 			
 			
 			
