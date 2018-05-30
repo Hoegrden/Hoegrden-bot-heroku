@@ -535,7 +535,7 @@ else if (message.content === `${prefix}맵`) {
 ////////////////////////////////////////////// 상위권한 명령어(매치 재시작)
 else if (message.content === `${prefix}매치재시작`) {
 	
-	if(message.member.roles.some(r=>["비상구", "자유평등"].includes(r.name)) ) {
+	if(message.member.roles.some(r=>["비 상 구", "자 유 평 등"].includes(r.name)) ) {
 
 	
 		clear_que();
@@ -740,7 +740,7 @@ client.on('message', async message => {
  
 	if (message.content === `${prefix}게임모드`) {
 		 
-		if(message.member.roles.some(r=>["비상구", "자유평등"].includes(r.name)) ) {
+		if(message.member.roles.some(r=>["비 상 구", "자 유 평 등"].includes(r.name)) ) {
 			
 			
 			
